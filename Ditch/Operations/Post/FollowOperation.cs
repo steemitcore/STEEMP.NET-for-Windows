@@ -1,0 +1,35 @@
+﻿using STEEM.Operations.Enums;
+
+namespace STEEM.Operations.Post
+{
+    /// <summary>
+    /// Follow / Unfollow some author
+    /// </summary>
+    public class UnFollowOperation : CustomJsonOperation
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="author"></param>
+        /// <param name="what">"blog","posts" or "blog" or "posts" or "" = (unfollow). (posts, comments, votes, ignore *https://github.com/steemit/steem/blob/master/libraries/wallet/include/steemit/wallet/wallet.hpp)</param>
+        /// <param name="requiredPostingAuths"></param>
+        /// <returns></returns>
+        public UnFollowOperation(string login, string author, FollowType[] what, params string[] requiredPostingAuths)
+            : base("follow", $"[\"follow\", {{\"follower\": \"{login}\", \"following\": \"{author}\", \"what\": [\"{string.Format("\", \"", what)}\"]}}]")
+        {
+            RequiredPostingAuths = requiredPostingAuths;
+        }
+
+        /// <param name="login"></param>
+        /// <param name="author"></param>
+        /// <param name="what">"blog","posts" or "blog" or "posts" or "" = (unfollow). (posts, comments, votes, ignore *https://github.com/steemit/steem/blob/master/libraries/wallet/include/steemit/wallet/wallet.hpp)</param>
+        /// <param name="requiredPostingAuths"></param>
+        /// <returns></returns>
+        public UnFollowOperation(string login, string author, FollowType what, params string[] requiredPostingAuths)
+            : base("follow", $"[\"follow\", {{\"follower\": \"{login}\", \"following\": \"{author}\", \"what\": [\"{what}\"]}}]")
+        {
+            RequiredPostingAuths = requiredPostingAuths;
+        }
+    }
+}
